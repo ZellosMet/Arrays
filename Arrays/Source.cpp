@@ -3,9 +3,10 @@
 using namespace std;
 
 //#define LESSON
-#define HOMEWORK
+//#define HOMEWORK
 
 void Fill_Array(int arr[], int size);
+void Show_Array(int arr[], int size);
 double Array_Sum(int arr[], int size);
 int Array_Max(int arr[], int size);
 int Array_Min(int arr[], int size);
@@ -43,12 +44,7 @@ void main()
 
 	Fill_Array(array, SIZE);
 
-	cout << "Сгенерированные элементы массива:\n\n";
-	for (int i = 0; i < SIZE; i++)
-	{
-		cout << "[ " << array[i] << " ] ";
-	}
-
+	cout << "Сгенерированные элементы массива:\n\n"; Show_Array(array, SIZE);
 	cout << "\n\nСумма элементов массива = " << Array_Sum(array, SIZE) << endl;
 	cout << "Среднее арифметическое элементов массивов = " << Array_Sum(array, SIZE)/SIZE << endl;
 	cout << "Максимальный элемент массива = " << Array_Max(array, SIZE) << endl;
@@ -60,6 +56,11 @@ void main()
 void Fill_Array(int arr[], int size)
 { 
 	for (int i = 0; i < size; i++) arr[i] = rand() % 100;
+}
+
+void Show_Array(int arr[], int size)
+{
+	for (int i = 0; i < size; i++) cout << "[ " << arr[i] << " ] ";
 }
 
 double Array_Sum(int arr[], int size)
