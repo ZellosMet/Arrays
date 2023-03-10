@@ -5,11 +5,11 @@ using namespace std;
 //#define LESSON
 //#define HOMEWORK
 
-void Fill_Array(int arr[], int size);
-void Show_Array(int arr[], int size);
-double Array_Sum(int arr[], int size);
-int Array_Max(int arr[], int size);
-int Array_Min(int arr[], int size);
+void Fill_Array(int arr[], int size); // Функция заполнения массива
+void Show_Array(int arr[], int size); //Функция вывода массива
+double Array_Sum(int arr[], int size); //Функция подсчёт суммы элементов
+int Array_Max(int arr[], int size); //Функция поиска максимального значения
+int Array_Min(int arr[], int size); //Функция поиска минимального значения
 
 void main()
 {
