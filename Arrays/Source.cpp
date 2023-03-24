@@ -28,7 +28,7 @@ char Sum(const char arr[ROWS][COLS], const int ROWS, const int COLS);
 double Avg(const int arr[], const int n);
 double Avg(const int arr[ROWS][COLS], const int ROWS, const int COLS);
 double Avg(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-double Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS);
+char Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS);
 //Перегрузка минимальных значений
 int minValueIn(const int arr[], const int n);
 int minValueIn(const int arr[ROWS][COLS], const int ROWS, const int COLS);
@@ -101,8 +101,7 @@ void main()
 #endif
 
 #ifdef ARRAYS_2
-
-
+	
 	int number_of_shifts = 5;
 	int i_arr[ROWS][COLS];
 	double d_arr[ROWS][COLS];
@@ -438,7 +437,7 @@ double Avg(const double arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	return (double)Sum(arr, ROWS, COLS) / (ROWS*COLS);
 }
-double Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS)
+char Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	return (double)Sum(arr, ROWS, COLS) / (ROWS*COLS);
 }
