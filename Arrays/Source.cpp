@@ -575,55 +575,42 @@ void shiftRight(char arr[ROWS][COLS], const int ROWS, const int COLS, int number
 }
 //Сортировка
 void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
+{	
+	for (int i = 0; i < ROWS; i++)
 	{
-		int tmp, i, j;
-		bool end = true;
-		while (end)
+		for (int j = 0; j < COLS; j++)
 		{
-			end = false;
-			i = 0; j = 0;
-			for (int n = 0; n < ROWS; n++)
+			for (int k = i; k < ROWS; k++)
 			{
-				for (int m = (n ? 0 : 1); m < COLS; m++)
+				for (int l = k == i ? j+1 : 0; l < COLS; l++)
 				{
-					if (arr[i][j] > arr[n][m])
+					if (arr[i][j]>arr[k][l])
 					{
-						tmp = arr[i][j];
-						arr[i][j] = arr[n][m];
-						arr[n][m] = tmp;
-						end = true;
+						arr[i][j] ^= arr[k][l];
+						arr[k][l] ^= arr[i][j];
+						arr[i][j] ^= arr[k][l];
 					}
-					i = n;
-					j = m;
-				}
+				}				
 			}
-		}
+		}		
 	}
 }
 void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS)
 {
+	for (int i = 0; i < ROWS; i++)
 	{
-		int i, j;
-		double tmp;
-		bool end = true;
-		while (end)
+		for (int j = 0; j < COLS; j++)
 		{
-			end = false;
-			i = 0; j = 0;
-			for (int n = 0; n < ROWS; n++)
+			for (int k = i; k < ROWS; k++)
 			{
-				for (int m = (n ? 0 : 1); m < COLS; m++)
+				for (int l = k == i ? j + 1 : 0; l < COLS; l++)
 				{
-					if (arr[i][j] > arr[n][m])
+					if (arr[i][j] > arr[k][l])
 					{
-						tmp = arr[i][j];
-						arr[i][j] = arr[n][m];
-						arr[n][m] = tmp;
-						end = true;
+						double tmp = arr[i][j];
+						arr[i][j] = arr[k][l];
+						arr[k][l] = tmp;						
 					}
-					i = n;
-					j = m;
 				}
 			}
 		}
@@ -631,26 +618,20 @@ void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS)
 }
 void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS)
 {
+	for (int i = 0; i < ROWS; i++)
 	{
-		int tmp, i, j;
-		bool end = true;
-		while (end)
+		for (int j = 0; j < COLS; j++)
 		{
-			end = false;
-			i = 0; j = 0;
-			for (int n = 0; n < ROWS; n++)
+			for (int k = i; k < ROWS; k++)
 			{
-				for (int m = (n ? 0 : 1); m < COLS; m++)
+				for (int l = k == i ? j + 1 : 0; l < COLS; l++)
 				{
-					if (arr[i][j] > arr[n][m])
+					if (arr[i][j] > arr[k][l])
 					{
-						tmp = arr[i][j];
-						arr[i][j] = arr[n][m];
-						arr[n][m] = tmp;
-						end = true;
+						arr[i][j] ^= arr[k][l];
+						arr[k][l] ^= arr[i][j];
+						arr[i][j] ^= arr[k][l];
 					}
-					i = n;
-					j = m;
 				}
 			}
 		}
