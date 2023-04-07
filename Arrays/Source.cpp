@@ -30,7 +30,7 @@ template<typename T> T Sum(T const arr[ROWS][COLS], const int ROWS, const int CO
 
 //Шаблон среднего арифметического элементов массива
 template<typename T> double Avg(T const arr[], const int size);
-template<typename T>double Avg(const T arr[ROWS][COLS], const int ROWS, const int COLS);
+template<typename T> double Avg(const T arr[ROWS][COLS], const int ROWS, const int COLS);
 
 //Шаблон минимальных значений
 template<typename T> T minValueIn(T const arr[], const int size);
