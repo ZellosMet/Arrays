@@ -7,13 +7,18 @@ const int COLS = 4;
 #define MAX 26
 #define MIN 65
 
-
 //Перегрузка заполнения массивов
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(double arr[], const int n);
 void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
 void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS);
 void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//Перегрузка уникальных значений
+void UniqueRand(int arr[], const int size);
+void UniqueRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void UniqueRand(double arr[ROWS][COLS], const int ROWS, const int COLS);
+void UniqueRand(char arr[ROWS][COLS], const int ROWS, const int COLS);
 
 //Шаблон вывода
 template<typename T> void Print(T const arr[], const int size);
@@ -45,11 +50,6 @@ template<typename T> void shiftRight(T arr[ROWS][COLS], const int ROWS, const in
 template<typename T> void Sort(T arr[], const int size);
 template<typename T> void Sort(T arr[ROWS][COLS], const int ROWS, const int COLS);
 
-//Перегрузка уникальных значений
-void UniqueRand(int arr[], const int size);
-void UniqueRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
-void UniqueRand(double arr[ROWS][COLS], const int ROWS, const int COLS);
-void UniqueRand(char arr[ROWS][COLS], const int ROWS, const int COLS);
 
 //Шаблон повторений
 template<typename T> void Search(T arr[], const int n);
@@ -63,7 +63,7 @@ void main()
 	setlocale(LC_ALL, "");
 
 #ifdef ARRAYS_1
-
+	cout << "---Линейный массив---" << endl;
 	const int n = 10;
 	int arr[n] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	FillRand(arr, n, 0, 5);
@@ -88,11 +88,12 @@ void main()
 	double line_d_arr[SIZE];
 	FillRand(line_d_arr, SIZE);
 	Print(line_d_arr, SIZE);
-
+	cout << endl;
 #endif
 
 #ifdef ARRAYS_2
-	
+
+	cout << "---Матрицы---" << endl;
 	int number_of_shifts = 5;
 	int i_arr[ROWS][COLS];
 	double d_arr[ROWS][COLS];
@@ -192,7 +193,6 @@ void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
-
 void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
@@ -204,7 +204,6 @@ void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
-
 void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
@@ -370,9 +369,9 @@ template<typename T> void Sort(T arr[], const int size)
 		{
 			if (arr[j] < arr[i])
 			{
-				arr[i] ^= arr[j];
-				arr[j] ^= arr[i];
-				arr[i] ^= arr[j];
+				T tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
 			}
 		}
 	}
