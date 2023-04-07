@@ -7,64 +7,55 @@ const int COLS = 4;
 #define MAX 26
 #define MIN 65
 
+
 //Перегрузка заполнения массивов
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(double arr[], const int n);
 void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
 void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS);
 void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS);
-//Перегрузка вывода массивов
-void Print(const int arr[], const int n);
-void Print(const double arr[], const int n);
-void Print(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-void Print(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-void Print(const char arr[ROWS][COLS], const int ROWS, const int COLS);
-//Перегрузка суммы элементов массива
-int Sum(const int arr[], const int n);
-int Sum(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-double Sum(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-char Sum(const char arr[ROWS][COLS], const int ROWS, const int COLS);
-//Перегрузка среднего арифметического элементов массива
-double Avg(const int arr[], const int n);
-double Avg(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-double Avg(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-char Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS);
-//Перегрузка минимальных значений
-int minValueIn(const int arr[], const int n);
-int minValueIn(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-double minValueIn(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-char minValueIn(const char arr[ROWS][COLS], const int ROWS, const int COLS);
-//Перегрузка максмальных значений
-int maxValueIn(const int arr[], const int n);
-int maxValueIn(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-double maxValueIn(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-char maxValueIn(const char arr[ROWS][COLS], const int ROWS, const int COLS);
-//Перегрузка для движения
-void shiftLeft(int arr[], const int n, int number_of_shifts);
-void shiftRight(int arr[], const int n, int number_of_shifts);
-void shiftLeft(int arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
-void shiftRight(int arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
-void shiftLeft(double arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
-void shiftRight(double arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
-void shiftLeft(char arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
-void shiftRight(char arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
-//Перегрузка сортировки
-void Sort(int arr[], const int n);
-void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
-void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS);
-void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//Шаблон вывода
+template<typename T> void Print(T const arr[], const int size);
+template<typename T> void Print(T const arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//Шаблон суммы элементов массива
+template<typename T> T Sum(T const arr[], const int size);
+template<typename T> T Sum(T const arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//Шаблон среднего арифметического элементов массива
+template<typename T> double Avg(T const arr[], const int size);
+template<typename T>double Avg(const T arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//Шаблон минимальных значений
+template<typename T> T minValueIn(T const arr[], const int size);
+template<typename T> T minValueIn(const T arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//Шаблон максмальных значений
+template<typename T> T maxValueIn(T const arr[], const int size);
+template<typename T> T maxValueIn(const T arr[ROWS][COLS], const int ROWS, const int COLS);
+
+//Шаблон для движения
+template<typename T> void shiftLeft(T arr[], const int n, int number_of_shifts);
+template<typename T> void shiftRight(T arr[], const int n, int number_of_shifts);
+template<typename T> void shiftLeft(T arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
+template<typename T> void shiftRight(T arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
+
+//Шаблон сортировки
+template<typename T> void Sort(T arr[], const int size);
+template<typename T> void Sort(T arr[ROWS][COLS], const int ROWS, const int COLS);
+
 //Перегрузка уникальных значений
-void UniqueRand(int arr[], const int n);
+void UniqueRand(int arr[], const int size);
 void UniqueRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
 void UniqueRand(double arr[ROWS][COLS], const int ROWS, const int COLS);
 void UniqueRand(char arr[ROWS][COLS], const int ROWS, const int COLS);
-//Перегрузка повторений
-void Search(int arr[], const int n);
-void Search(int arr[ROWS][COLS], const int ROWS, const int COLS);
-void Search(double arr[ROWS][COLS], const int ROWS, const int COLS);
-void Search(char arr[ROWS][COLS], const int ROWS, const int COLS);
 
-//#define ARRAYS_1
+//Шаблон повторений
+template<typename T> void Search(T arr[], const int n);
+template<typename T> void Search(T arr[ROWS][COLS], const int ROWS, const int COLS);
+
+#define ARRAYS_1
 #define ARRAYS_2
 
 void main()
@@ -86,17 +77,17 @@ void main()
 	Sort(arr, n);
 	Print(arr, n);
 
-	/int number_of_shifts;
-	cout << "Введите количество сдвигов: "; cin >> number_of_shifts;
-	shiftLeft(arr, n, number_of_shifts);
+	int line_number_of_shifts;
+	cout << "Введите количество сдвигов: "; cin >> line_number_of_shifts;
+	shiftLeft(arr, n, line_number_of_shifts);
 	Print(arr, n);
-	shiftRight(arr, n, number_of_shifts);
+	shiftRight(arr, n, line_number_of_shifts);
 	Print(arr, n);
 
 	const int SIZE = 8;
-	double d_arr[SIZE];
-	FillRand(d_arr, SIZE);
-	Print(d_arr, SIZE);
+	double line_d_arr[SIZE];
+	FillRand(line_d_arr, SIZE);
+	Print(line_d_arr, SIZE);
 
 #endif
 
@@ -174,154 +165,23 @@ void main()
 	
 #endif 
 }
+
+//Заполнение
 void FillRand(int arr[], const int n, int minRand, int maxRand)
 {
 	for (int i = 0; i < n; i++)
 	{
-		arr[i] = rand() % (maxRand - minRand) + minRand;
+		arr[i] = rand() % 100;
 	}
 }
 void FillRand(double arr[], const int n)
-{	
+{
 	for (int i = 0; i < n; i++)
 	{
 		arr[i] = rand() % 10000;
 		arr[i] /= 100;
 	}
 }
-void Print(const int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
-}
-void Print(const double arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
-}
-
-int Sum(const int arr[], const int n)
-{
-	int sum = 0;
-	for (int i = 0; i < n; i++)
-	{
-		sum += arr[i];
-	}
-	return sum;
-}
-double Avg(const int arr[], const int n)
-{
-	return (double)Sum(arr, n) / n;
-}
-int minValueIn(const int arr[], const int n)
-{
-	int min = arr[0];
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] < min)min = arr[i];
-	}
-	return min;
-}
-int maxValueIn(const int arr[], const int n)
-{
-	int max = arr[0];
-	for (int i = 0; i < n; i++)
-	{
-		if (arr[i] > max)max = arr[i];
-	}
-	return max;
-}
-
-void Sort(int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = i + 1; j < n; j++)
-		{
-			if (arr[j] < arr[i])
-			{
-				arr[i] ^= arr[j];
-				arr[j] ^= arr[i];
-				arr[i] ^= arr[j];
-			}
-		}
-	}
-}
-
-void shiftLeft(int arr[], const int n, int number_of_shifts)
-{
-	for (int i = 0; i < number_of_shifts; i++)
-	{
-		int buffer = arr[0];
-		for (int i = 0; i < n; i++)
-		{
-			arr[i] = arr[i + 1];
-		}
-		arr[n - 1] = buffer;
-	}
-}
-void shiftRight(int arr[], const int n, int number_of_shifts)
-{
-	for (int i = 0; i < number_of_shifts; i++)
-	{
-		int buffer = arr[n - 1];
-		for (int i = n - 1; i > 0; i--)
-		{
-			arr[i] = arr[i - 1];
-		}
-		arr[0] = buffer;
-	}
-
-}
-void UniqueRand(int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % 10;
-		for (int j = 0; j < i; j++)
-		{
-			if (arr[i] == arr[j])
-			{
-				i--;
-				break;
-			}
-		}
-	}
-}
-void Search(int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		bool met_before = false;
-		for (int j = 0; j < i; j++)
-		{
-			if (arr[i] == arr[j])
-			{
-				met_before = true;	
-				break;	
-			}
-		}
-		if (met_before)continue;	
-		int count = 0;	
-		for (int j = i + 1; j < n; j++)
-		{
-			if (arr[i] == arr[j])
-			{
-				count++;
-			}
-		}
-		if (count)cout << "Значение " << arr[i] << " повторяетя " << count << " раз" << endl;
-	}
-}
-
-/////  Перегрузка функция для матриц int, double, char
-//Заполнение
 void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
@@ -332,6 +192,7 @@ void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
+
 void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
@@ -343,6 +204,7 @@ void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
+
 void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
@@ -353,8 +215,17 @@ void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
+
 //Вывод
-void Print(const int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T> void Print(T const arr[], const int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+	cout << endl;
+}
+template<typename T> void Print(T const arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -365,36 +236,20 @@ void Print(const int arr[ROWS][COLS], const int ROWS, const int COLS)
 		cout << endl;
 	}
 }
-void Print(const double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	{
-		for (int i = 0; i < ROWS; i++)
-		{
-			for (int j = 0; j < COLS; j++)
-			{
-				cout << "[ " << arr[i][j] << " ] ";
-			}
-			cout << endl;
-		}
-	}
-}
-void Print(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	{
-		for (int i = 0; i < ROWS; i++)
-		{
-			for (int j = 0; j < COLS; j++)
-			{
-				cout << "[ " << arr[i][j] << " ] ";
-			}
-			cout << endl;
-		}
-	}
-}
+
 //Сумма
-int Sum(const int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T> T Sum(T const arr[], const int size)
 {
-	int sum = 0;
+	T sum = 0;
+	for (int i = 0; i < size; i++)
+	{
+		sum += arr[i];
+	}
+	return sum;
+}
+template<typename T> T Sum(T const arr[ROWS][COLS], int ROWS, int COLS)
+{
+	T sum = 0;
 	for (int i = 0; i < ROWS; i++)
 	{
 		for (int j = 0; j < COLS; j++)
@@ -404,47 +259,30 @@ int Sum(const int arr[ROWS][COLS], const int ROWS, const int COLS)
 	}
 	return sum;
 }
-double Sum(const double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	double sum = 0;
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			sum += arr[i][j];
-		}
-	}
-	return sum;
-}
-char Sum(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	int sum = 0;
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			sum += arr[i][j];
-		}
-	}
-	return sum;
-}
+
 //Среднее арифметическое
-double Avg(const int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T> double Avg(T const arr[], const int size)
+{
+	return (double)Sum(arr, size) / size;
+}
+template<typename T>double Avg(const T arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	return (double)Sum(arr, ROWS, COLS) / (ROWS*COLS);
 }
-double Avg(const double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	return (double)Sum(arr, ROWS, COLS) / (ROWS*COLS);
-}
-char Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	return (double)Sum(arr, ROWS, COLS) / (ROWS*COLS);
-}
+
 //Минимальное значение
-int minValueIn(const int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T> T minValueIn(T const arr[], const int size)
 {
-	int min = arr[0][0];
+	T min = arr[0];
+	for (int i = 0; i < size; i++)
+	{
+		if (arr[i] < min)min = arr[i];
+	}
+	return min;
+}
+template<typename T> T minValueIn(const T arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	T min = arr[0][0];
 	for (int i = 0; i < ROWS; i++)
 	{
 		for (int j = 0; j < COLS; j++)
@@ -454,34 +292,20 @@ int minValueIn(const int arr[ROWS][COLS], const int ROWS, const int COLS)
 	}
 	return min;
 }
-double minValueIn(const double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	double min = arr[0][0];
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			if (arr[i][j] < min)min = arr[i][j];
-		}
-	}
-	return min;
-}
-char minValueIn(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	int min = arr[0][0];
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			if (arr[i][j] < min)min = arr[i][j];
-		}
-	}
-	return min;
-}
+
 //Максимаьное значение
-int maxValueIn(const int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T> T maxValueIn(T const arr[], const int size)
 {
-	int max = arr[0][0];
+	T max = arr[0];
+	for (int i = 0; i < size; i++)
+	{
+		if (arr[i] > max)max = arr[i];
+	}
+	return max;
+}
+template<typename T> T maxValueIn(const T arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	T max = arr[0][0];
 	for (int i = 0; i < ROWS; i++)
 	{
 		for (int j = 0; j < COLS; j++)
@@ -491,32 +315,33 @@ int maxValueIn(const int arr[ROWS][COLS], const int ROWS, const int COLS)
 	}
 	return max;
 }
-double maxValueIn(const double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	double max = arr[0][0];
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			if (arr[i][j] > max)max = arr[i][j];
-		}
-	}
-	return max;
-}
-char maxValueIn(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	int max = arr[0][0];
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			if (arr[i][j] > max)max = arr[i][j];
-		}
-	}
-	return max;
-}
+
 //Движение массива
-void shiftLeft(int arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
+template<typename T> void shiftLeft(T arr[], const int n, int number_of_shifts)
+{
+	for (int i = 0; i < number_of_shifts; i++)
+	{
+		int buffer = arr[0];
+		for (int i = 0; i < n; i++)
+		{
+			arr[i] = arr[i + 1];
+		}
+		arr[n - 1] = buffer;
+	}
+}
+template<typename T> void shiftRight(T arr[], const int n, int number_of_shifts)
+{
+	for (int i = 0; i < number_of_shifts; i++)
+	{
+		int buffer = arr[n - 1];
+		for (int i = n - 1; i > 0; i--)
+		{
+			arr[i] = arr[i - 1];
+		}
+		arr[0] = buffer;
+	}
+}
+template<typename T> void shiftLeft(T arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
 {
 	for (int i = 0; i < number_of_shifts; i++)
 	{
@@ -531,50 +356,28 @@ void shiftLeft(int arr[ROWS][COLS], const int ROWS, const int COLS, int number_o
 		arr[ROWS-1][COLS-1] = buffer;
 	}
 }
-void shiftRight(int arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
+template<typename T> void shiftRight(T arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
 {
 	shiftLeft(arr, ROWS, COLS, ROWS * COLS - number_of_shifts);
 }
-void shiftLeft(double arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
-{
-	for (int i = 0; i < number_of_shifts; i++)
-	{
-		double buffer = arr[0][0];
-		for (int i = 0; i < ROWS; i++)
-		{
-			for (int j = 0; j < COLS; j++)
-			{
-				arr[i][j] = arr[i][j + 1];
-			}
-		}
-		arr[ROWS - 1][COLS - 1] = buffer;
-	}
-}
-void shiftRight(double arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
-{
-	shiftLeft(arr, ROWS, COLS, ROWS * COLS - number_of_shifts);
-}
-void shiftLeft(char arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
-{
-	for (int i = 0; i < number_of_shifts; i++)
-	{
-		char buffer = arr[0][0];
-		for (int i = 0; i < ROWS; i++)
-		{
-			for (int j = 0; j < COLS; j++)
-			{
-				arr[i][j] = arr[i][j + 1];
-			}
-		}
-		arr[ROWS-1][COLS - 1] = buffer;
-	}
-}
-void shiftRight(char arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts)
-{
-	shiftLeft(arr, ROWS, COLS, ROWS * COLS - number_of_shifts);
-}
+
 //Сортировка
-void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T> void Sort(T arr[], const int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = i + 1; j < size; j++)
+		{
+			if (arr[j] < arr[i])
+			{
+				arr[i] ^= arr[j];
+				arr[j] ^= arr[i];
+				arr[i] ^= arr[j];
+			}
+		}
+	}
+}
+template<typename T> void Sort(T arr[ROWS][COLS], const int ROWS, const int COLS)
 {	
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -586,58 +389,32 @@ void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
 				{
 					if (arr[i][j]>arr[k][l])
 					{
-						arr[i][j] ^= arr[k][l];
-						arr[k][l] ^= arr[i][j];
-						arr[i][j] ^= arr[k][l];
+						T tmp = arr[i][j];
+						arr[i][j] = arr[k][l];
+						arr[k][l] = tmp;
 					}
 				}				
 			}
 		}		
 	}
 }
-void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			for (int k = i; k < ROWS; k++)
-			{
-				for (int l = k == i ? j + 1 : 0; l < COLS; l++)
-				{
-					if (arr[i][j] > arr[k][l])
-					{
-						double tmp = arr[i][j];
-						arr[i][j] = arr[k][l];
-						arr[k][l] = tmp;						
-					}
-				}
-			}
-		}
-	}
-}
-void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			for (int k = i; k < ROWS; k++)
-			{
-				for (int l = k == i ? j + 1 : 0; l < COLS; l++)
-				{
-					if (arr[i][j] > arr[k][l])
-					{
-						arr[i][j] ^= arr[k][l];
-						arr[k][l] ^= arr[i][j];
-						arr[i][j] ^= arr[k][l];
-					}
-				}
-			}
-		}
-	}
-}
+
 //Уникальные значения
+void UniqueRand(int arr[], const int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = rand() % 10;
+		for (int j = 0; j < i; j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				i--;
+				break;
+			}
+		}
+	}
+}
 void UniqueRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	int rnd;
@@ -714,7 +491,34 @@ void UniqueRand(char arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
-void Search(int arr[ROWS][COLS], const int ROWS, const int COLS)
+//Поиск повторений
+template<typename T> void Search(T arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		bool met_before = false;
+		for (int j = 0; j < i; j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				met_before = true;
+				break;
+			}
+		}
+		if (met_before)continue;
+		int count = 0;
+		for (int j = i + 1; j < n; j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				count++;
+			}
+		}
+		if (count)cout << "Значение " << arr[i] << " повторяетя " << count << " раз" << endl;
+	}
+}
+
+template<typename T> void Search(T arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -726,72 +530,6 @@ void Search(int arr[ROWS][COLS], const int ROWS, const int COLS)
 				for (int m = j+1; m < COLS; m++)
 				{
 					if (arr[i][j]==arr[n][m])
-					{
-						met_before = true;
-						break;
-					}
-				}
-				if (met_before) break;
-			}
-
-			if (met_before) continue;
-			int count = -1;
-			for (int n = 0; n < ROWS; n++)
-			{
-				for (int m = 0; m < COLS; m++)
-				{
-					if (arr[i][j] == arr[n][m]) count++;
-				}
-			}
-			if (count)cout << "Значение " << arr[i][j] << " повторяетя " << count << " раз" << endl;
-		}
-	}
-}
-void Search(double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			bool met_before = false;
-			for (int n = 0; n < ROWS; n++)
-			{
-				for (int m = j + 1; m < COLS; m++)
-				{
-					if (arr[i][j] == arr[n][m])
-					{
-						met_before = true;
-						break;
-					}
-				}
-				if (met_before) break;
-			}
-
-			if (met_before) continue;
-			int count = -1;
-			for (int n = 0; n < ROWS; n++)
-			{
-				for (int m = 0; m < COLS; m++)
-				{
-					if (arr[i][j] == arr[n][m]) count++;
-				}
-			}
-			if (count)cout << "Значение " << arr[i][j] << " повторяетя " << count << " раз" << endl;
-		}
-	}
-}
-void Search(char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			bool met_before = false;
-			for (int n = 0; n < ROWS; n++)
-			{
-				for (int m = j + 1; m < COLS; m++)
-				{
-					if (arr[i][j] == arr[n][m])
 					{
 						met_before = true;
 						break;
